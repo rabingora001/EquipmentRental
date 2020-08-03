@@ -2,36 +2,21 @@ package edu.tacoma.uw.equipmentrental.authenticate;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Arrays;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 
@@ -43,7 +28,11 @@ import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 public class LoginFragment extends Fragment {
 
     private LoginFragmentListener mLoginFragmentListener;
+    //fb
+    private LoginButton mFbLoginButton;
+    CallbackManager mCallbackManager;
 
+    private boolean mIsCustomLogin;
 
     public interface LoginFragmentListener {
          void login(String email, String pwd);
@@ -56,8 +45,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkLoginStatus();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +54,32 @@ public class LoginFragment extends Fragment {
 //        getActivity().setTitle("Welcome to Equipment Rental");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
         mLoginFragmentListener = (LoginFragmentListener) getActivity();
+
+        mCallbackManager = CallbackManager.Factory.create();
+
+        mFbLoginButton = view.findViewById(R.id.fb_sign_in_btn_id1);
+        mFbLoginButton.setPermissions(Arrays.asList("email", "public_profile"));
+
+//         Callback registration
+        mFbLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                displayMainMenuPage();
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
+
         final EditText emailText = view.findViewById(R.id.sign_in_email_id);
         final EditText pwdText = view.findViewById(R.id.sign_in_password_id);
         Button loginBtn = view.findViewById(R.id.sign_in_button_id);
@@ -90,7 +104,25 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void displayMainMenuPage() {
+        Intent i = new Intent(getActivity(), MainMenuActivity.class);
+        getActivity().startActivity(i);
+    }
+
+    private void checkLoginStatus() {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            displayMainMenuPage();
+        }
     }
 
 }
