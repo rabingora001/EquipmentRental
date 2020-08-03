@@ -2,7 +2,6 @@ package edu.tacoma.uw.equipmentrental.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,17 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.authenticate.SignInActivity;
@@ -31,7 +27,6 @@ public class MainMenuActivity extends AppCompatActivity {
     private CircleImageView mCircleImageView;
     private TextView mTextName;
     private TextView mTextEmail;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +59,6 @@ public class MainMenuActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 
     private void loadUserProfile(AccessToken newAccessToken) {
         GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
@@ -109,10 +100,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 mTextEmail.setText("");
                 mCircleImageView.setImageResource(0);
                 Toast.makeText(MainMenuActivity.this, "User logged out", Toast.LENGTH_SHORT).show();
-
                 displaySignInActivityPage();
-
-
             } else {
                 loadUserProfile(currentAccessToken);
             }
@@ -122,14 +110,11 @@ public class MainMenuActivity extends AppCompatActivity {
     private void checkLoginStatus() {
         if (AccessToken.getCurrentAccessToken() != null) {
             loadUserProfile(AccessToken.getCurrentAccessToken());
-
         }
     }
 
     public void displaySignInActivityPage(){
         Intent i = new Intent(this, SignInActivity.class);
         startActivity(i);
-//        finish();
     }
-
 }
