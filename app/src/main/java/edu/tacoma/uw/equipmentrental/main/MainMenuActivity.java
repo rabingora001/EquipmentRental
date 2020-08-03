@@ -22,12 +22,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.authenticate.SignInActivity;
 
+/*
+This is the dashboard page(MainMenuActivity) of our app.
+ */
 public class MainMenuActivity extends AppCompatActivity {
 
     private CircleImageView mCircleImageView;
     private TextView mTextName;
     private TextView mTextEmail;
 
+    /*
+    checks for login Status.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,6 @@ public class MainMenuActivity extends AppCompatActivity {
         mTextName = findViewById(R.id.profile_name_id);
         mTextEmail = findViewById(R.id.profile_email_id);
         mCircleImageView = findViewById(R.id.profile_pic_id);
-
         checkLoginStatus();
     }
 

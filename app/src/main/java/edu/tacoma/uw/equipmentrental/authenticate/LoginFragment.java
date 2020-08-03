@@ -36,6 +36,7 @@ public class LoginFragment extends Fragment {
 
     public interface LoginFragmentListener {
          void login(String email, String pwd);
+         void signUp();
     }
 
     public LoginFragment() {
@@ -82,6 +83,7 @@ public class LoginFragment extends Fragment {
 
         final EditText emailText = view.findViewById(R.id.sign_in_email_id);
         final EditText pwdText = view.findViewById(R.id.sign_in_password_id);
+        //sign In button click listener
         Button loginBtn = view.findViewById(R.id.sign_in_button_id);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +104,15 @@ public class LoginFragment extends Fragment {
                 } else {
                     mLoginFragmentListener.login(email, pwd);
                 }
+            }
+        });
+
+        //signUp button click listener
+        Button singUpButton = view.findViewById(R.id.sign_up_button_id);
+        singUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoginFragmentListener.signUp();
             }
         });
 
