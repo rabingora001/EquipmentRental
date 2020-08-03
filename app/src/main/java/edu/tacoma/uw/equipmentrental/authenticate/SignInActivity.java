@@ -28,9 +28,10 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        setTitle("Welcome to Equipment Rental");
 
         /*
         check to see if user is already loggedin using SharedPreferences.
