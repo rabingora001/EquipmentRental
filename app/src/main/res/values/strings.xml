@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Equipment Rental</string>
+
+    <string name="LOGIN_PREFS">edu.tacoma.uw.equipmentrental.PREFS</string>
+    <string name="LOGGEDIN">loggedin</string>
+
+    <string name="action_logout">Sign Out</string>
+
+    //facebook login
+    <string name="facebook_app_id">1608827635961452</string>
+    <string name="fb_login_protocol_scheme">fb1608827635961452</string>
+
+
+</resources>
