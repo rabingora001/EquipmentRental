@@ -22,19 +22,18 @@ import edu.tacoma.uw.equipmentrental.R;
  */
 public class RegisterFragment extends Fragment {
 
-    //member variable for submit button listener.
+    //submit button listener.
     RegisterFragmentListener mRegisterFragmentListener;
 
     /**
      * interface for submit button listener
      */
     public interface RegisterFragmentListener{
-        public void registerSubmit();
+        public void registerSubmit(String username, String email, String pwd);
     }
     public RegisterFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +85,7 @@ public class RegisterFragment extends Fragment {
                     passwordText.requestFocus();
 
                 } else {
-                    mRegisterFragmentListener.registerSubmit();
+                    mRegisterFragmentListener.registerSubmit(username, email, password);
                 }
             }
         });
