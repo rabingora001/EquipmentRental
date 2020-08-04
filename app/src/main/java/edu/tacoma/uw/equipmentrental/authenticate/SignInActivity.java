@@ -21,7 +21,7 @@ import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 /**
  * This is the main luncher activity for this project.
  */
-public class SignInActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener {
+public class SignInActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener, RegisterFragment.RegisterFragmentListener {
 
     //member variable for SharedPreferences
     private SharedPreferences mSharedPreferences;
@@ -34,13 +34,11 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        setTitle("Welcome to Equipment Rental");
-
         //checks if already logged in with fb
         checkLoginStatus();
 
         /*
-        check to see if user is already loggedin using SharedPreferences.
+        check to see if user is already logged in using SharedPreferences.
         if logged in, go to MainMenuActivity. If not, display the login fragment.
          */
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
@@ -53,12 +51,37 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
                     .commit();
         } else {
             displayMainMenuPage();
-//            finish();
         }
     }
 
     /*
+    The declaration of signUp() form the LoginFragment.LoginFragmentListener.
+    This will replace the LoginFragment fragment with RegisterFragment.
+     */
+    @Override
+    public void signUp() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.sign_in_fragment_id, new RegisterFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /*
+     method declaration of RegisterFragment.RegisterFragmentListener
+     */
+    @Override
+    public void registerSubmit() {
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .commit();
+        displayMainMenuPage();
+    }
+
+    /*
     The declaration of login() from the LoginFragment.LoginFragmentListener.
+    displays the MainMenuActivity.class activity.
      */
     @Override
     public void login(String email, String pwd) {
@@ -67,16 +90,6 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
                 .putBoolean(getString(R.string.LOGGEDIN), true)
                 .commit();
         displayMainMenuPage();
-//        finish();
-    }
-
-    /*
-    The declaration of signUp() form the LoginFragment.LoginFragmentListener.
-     */
-    @Override
-    public void signUp() {
-        Intent i = new Intent(this, SignUpActivity.class);
-        startActivity(i);
     }
 
     /*

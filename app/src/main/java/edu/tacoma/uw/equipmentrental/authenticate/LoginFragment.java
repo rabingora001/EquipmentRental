@@ -46,13 +46,12 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        getActivity().setTitle("Welcome to Equipment Rental");
+        getActivity().setTitle("Welcome to Equipment Rental");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
@@ -63,7 +62,7 @@ public class LoginFragment extends Fragment {
         mFbLoginButton = view.findViewById(R.id.fb_sign_in_btn_id1);
         mFbLoginButton.setPermissions(Arrays.asList("email", "public_profile"));
 
-//         Callback registration
+//      Callback registration for fb login
         mFbLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
