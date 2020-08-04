@@ -46,7 +46,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkLoginStatus();
+
     }
 
     @Override
@@ -72,7 +72,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onCancel() {
-                // App code
+
             }
 
             @Override
@@ -130,10 +130,6 @@ public class LoginFragment extends Fragment {
         getActivity().startActivity(i);
     }
 
-    private void checkLoginStatus() {
-        if (AccessToken.getCurrentAccessToken() != null) {
-            displayMainMenuPage();
-        }
-    }
+
 
 }

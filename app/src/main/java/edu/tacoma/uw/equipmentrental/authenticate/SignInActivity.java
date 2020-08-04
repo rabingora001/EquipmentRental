@@ -12,6 +12,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import com.facebook.AccessToken;
+
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 
@@ -33,6 +36,9 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
 
         setTitle("Welcome to Equipment Rental");
 
+        //checks if already logged in with fb
+        checkLoginStatus();
+
         /*
         check to see if user is already loggedin using SharedPreferences.
         if logged in, go to MainMenuActivity. If not, display the login fragment.
@@ -46,9 +52,8 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
                     .add(R.id.sign_in_fragment_id, new LoginFragment())
                     .commit();
         } else {
-            Intent intent = new Intent(this, MainMenuActivity.class);
-            startActivity(intent);
-            finish();
+            displayMainMenuPage();
+//            finish();
         }
     }
 
@@ -61,13 +66,12 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
                 .edit()
                 .putBoolean(getString(R.string.LOGGEDIN), true)
                 .commit();
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        startActivity(intent);
-        finish();
+        displayMainMenuPage();
+//        finish();
     }
 
     /*
-    The decleration of signUp() form the LoginFragment.LoginFragmentListener.
+    The declaration of signUp() form the LoginFragment.LoginFragmentListener.
      */
     @Override
     public void signUp() {
@@ -77,7 +81,6 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
 
     /*
     The method to help load Activity from the LoginFragment.
-    because Fragment alone cannot display Activity.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -86,5 +89,22 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
 
             fragment.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    /*
+    checks login status for facebook with currentToken.
+     */
+    private void checkLoginStatus() {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            displayMainMenuPage();
+        }
+    }
+
+    /*
+    This method starts the MainMenuActivity.class
+     */
+    public void displayMainMenuPage() {
+        Intent i = new Intent(this, MainMenuActivity.class);
+        startActivity(i);
     }
 }

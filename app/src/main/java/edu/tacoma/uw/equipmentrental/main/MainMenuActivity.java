@@ -16,6 +16,8 @@ import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,7 +34,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private TextView mTextEmail;
 
     /*
-    checks for login Status.
+    OnCreate method.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +44,38 @@ public class MainMenuActivity extends AppCompatActivity {
         mTextName = findViewById(R.id.profile_name_id);
         mTextEmail = findViewById(R.id.profile_email_id);
         mCircleImageView = findViewById(R.id.profile_pic_id);
+        //checks for facebook login status.
         checkLoginStatus();
     }
 
+    /*
+    Creates the menu with menu_main.xml
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /*
+    operates the logout functions.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.action_logout) {
+
+            //logout from shared preferences.
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS),
                     Context.MODE_PRIVATE);
             sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false).commit();
 
-            Intent i = new Intent(this, SignInActivity.class);
-            startActivity(i);
-            finish();
+            //logout from facebook
+            if (AccessToken.getCurrentAccessToken() != null) {
+                LoginManager.getInstance().logOut();
+            }
+
+            //display the SignInActivity.
+            displaySignInActivityPage();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -96,6 +111,9 @@ public class MainMenuActivity extends AppCompatActivity {
         request.executeAsync();
     }
 
+    /*
+    AccessToken Tracker for facebook login.
+     */
     AccessTokenTracker tokenTracker = new AccessTokenTracker() {
         @Override
         protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
@@ -105,7 +123,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 mTextEmail.setText("");
                 mCircleImageView.setImageResource(0);
                 Toast.makeText(MainMenuActivity.this, "User logged out", Toast.LENGTH_SHORT).show();
-                displaySignInActivityPage();
+//                displaySignInActivityPage();
             } else {
                 loadUserProfile(currentAccessToken);
             }
