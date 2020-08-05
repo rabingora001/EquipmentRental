@@ -18,12 +18,31 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp"/>
 
+    <EditText
+        android:id="@+id/register_first_name_id"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:id="@+id/register_last_name_id"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/register_username_id"
         android:layout_width="220dp"
         android:layout_height="40dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:hint="User Name"
         android:inputType="textPersonName"
@@ -33,7 +52,7 @@
         android:id="@+id/register_email_id"
         android:layout_width="220dp"
         android:layout_height="40dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Email"
@@ -44,7 +63,7 @@
         android:id="@+id/register_password_id"
         android:layout_width="220dp"
         android:layout_height="40dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Password"
@@ -55,7 +74,7 @@
         android:id="@+id/register_retype_password_id"
         android:layout_width="220dp"
         android:layout_height="40dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Re-enter Password"

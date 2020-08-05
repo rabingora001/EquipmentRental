@@ -29,7 +29,7 @@ public class RegisterFragment extends Fragment {
      * interface for submit button listener
      */
     public interface RegisterFragmentListener{
-        public void registerSubmit(String username, String email, String pwd);
+        public void registerSubmit(String firstName, String lastName, String username, String email, String pwd);
     }
     public RegisterFragment() {
         // Required empty public constructor
@@ -40,6 +40,10 @@ public class RegisterFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /*
+    checks for authentication for the text entries for registrations in this method.
+    Throws errors if not properly authenticated.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class RegisterFragment extends Fragment {
 
         mRegisterFragmentListener = (RegisterFragmentListener) getActivity();
 
+        final EditText firstNameText = view.findViewById(R.id.register_first_name_id);
+        final EditText lastNameText = view.findViewById(R.id.register_last_name_id);
         final EditText usernameText = view.findViewById(R.id.register_username_id);
         final EditText emailText = view.findViewById(R.id.register_email_id);
         final EditText passwordText = view.findViewById(R.id.register_password_id);
@@ -60,12 +66,24 @@ public class RegisterFragment extends Fragment {
         registerSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String firstName = firstNameText.getText().toString();
+                String lastName = lastNameText.getText().toString();
                 String username = usernameText.getText().toString();
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
                 String retypedPassword = retypedPasswordText.getText().toString();
 
-                if (TextUtils.isEmpty(username) || username.length() < 2) {
+                if (TextUtils.isEmpty(firstName) || firstName.length() < 2) {
+                    Toast.makeText(v.getContext(), "Enter valid first name with at least 2 characters",
+                            Toast.LENGTH_SHORT).show();
+                    firstNameText.requestFocus();
+
+                } else if (TextUtils.isEmpty(lastName) || lastName.length() < 2) {
+                    Toast.makeText(v.getContext(), "Enter valid last name with at least 2 characters",
+                            Toast.LENGTH_SHORT).show();
+                    lastNameText.requestFocus();
+
+                } else if (TextUtils.isEmpty(username) || username.length() < 2) {
                     Toast.makeText(v.getContext(), "Enter valid username with at least 2 characters",
                             Toast.LENGTH_SHORT).show();
                     usernameText.requestFocus();
@@ -85,7 +103,7 @@ public class RegisterFragment extends Fragment {
                     passwordText.requestFocus();
 
                 } else {
-                    mRegisterFragmentListener.registerSubmit(username, email, password);
+                    mRegisterFragmentListener.registerSubmit(firstName, lastName, username, email, password);
                 }
             }
         });

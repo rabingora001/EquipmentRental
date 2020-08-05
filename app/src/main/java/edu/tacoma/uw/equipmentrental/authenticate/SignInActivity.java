@@ -71,7 +71,7 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
      method declaration of RegisterFragment.RegisterFragmentListener
      */
     @Override
-    public void registerSubmit(String username, String email, String pwd) {
+    public void registerSubmit(String firstName, String lastName, String username, String email, String pwd) {
         mSharedPreferences
                 .edit()
                 .putBoolean(getString(R.string.LOGGEDIN), true)

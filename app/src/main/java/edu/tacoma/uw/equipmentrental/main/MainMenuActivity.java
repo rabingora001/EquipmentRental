@@ -1,3 +1,9 @@
+/**
+ * TCSS 450 project-Equipment Rental
+ * Summer 2020
+ * Rabin Gora
+ * Daniel Flynn
+ */
 package edu.tacoma.uw.equipmentrental.main;
 
 import androidx.annotation.NonNull;

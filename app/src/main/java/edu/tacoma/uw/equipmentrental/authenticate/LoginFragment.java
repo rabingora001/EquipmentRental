@@ -27,13 +27,18 @@ import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
  */
 public class LoginFragment extends Fragment {
 
+    //member LoginFragmentListener
     private LoginFragmentListener mLoginFragmentListener;
-    //fb
+
+    // for fb
     private LoginButton mFbLoginButton;
     CallbackManager mCallbackManager;
 
     private boolean mIsCustomLogin;
 
+    /*
+    Interface for the LoginFragment Listener
+     */
     public interface LoginFragmentListener {
          void login(String email, String pwd);
          void signUp();
@@ -48,6 +53,12 @@ public class LoginFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /*
+    Checks for authentication for custom login and throws toast error message
+    if not authenticate. Calls the login with facebook id for alternate login.
+    OnClick listeners for the login and signup button.
+    If everything is successful, displays the MainMenuActivity.class
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -118,12 +129,18 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
+    /*
+    method to callback manager for the facebook login
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    /*
+    method to display the MainMenuActivity.class Activity.
+     */
     public void displayMainMenuPage() {
         Intent i = new Intent(getActivity(), MainMenuActivity.class);
         getActivity().startActivity(i);
