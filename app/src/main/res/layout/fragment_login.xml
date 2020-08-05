@@ -15,12 +15,11 @@
         android:layout_height="201dp"
         android:src="@drawable/equipment_rental_logo"
         android:layout_gravity="center"
-        android:layout_marginTop="28dp"
-        app:srcCompat="@mipmap/logo" />
+        android:layout_marginTop="16dp" />
 
     <EditText
-        android:layout_width="222dp"
-        android:layout_height="51dp"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
         android:id="@+id/sign_in_email_id"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
@@ -28,11 +27,12 @@
         android:hint="Enter your email" />
 
     <EditText
-        android:layout_width="222dp"
-        android:layout_height="51dp"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
         android:background="@android:color/white"
         android:id="@+id/sign_in_password_id"
         android:layout_marginTop="28dp"
+        android:inputType="textPassword"
         android:layout_gravity="center"
         android:hint="Enter your password" />
 
@@ -62,7 +62,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="If not registerd, please sign up below"
+        android:text="If not registered, please sign up below"
         android:layout_marginTop="28dp"
         android:layout_gravity="center" />
     <Button

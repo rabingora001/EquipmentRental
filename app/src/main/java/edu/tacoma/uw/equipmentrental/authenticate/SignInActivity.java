@@ -12,13 +12,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import com.facebook.AccessToken;
+
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 
 /**
  * This is the main luncher activity for this project.
  */
-public class SignInActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener {
+public class SignInActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener, RegisterFragment.RegisterFragmentListener {
 
     //member variable for SharedPreferences
     private SharedPreferences mSharedPreferences;
@@ -31,10 +34,11 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        setTitle("Welcome to Equipment Rental");
+        //checks if already logged in with fb
+        checkLoginStatus();
 
         /*
-        check to see if user is already loggedin using SharedPreferences.
+        check to see if user is already logged in using SharedPreferences.
         if logged in, go to MainMenuActivity. If not, display the login fragment.
          */
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
@@ -46,14 +50,38 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
                     .add(R.id.sign_in_fragment_id, new LoginFragment())
                     .commit();
         } else {
-            Intent intent = new Intent(this, MainMenuActivity.class);
-            startActivity(intent);
-            finish();
+            displayMainMenuPage();
         }
     }
 
     /*
+    The declaration of signUp() form the LoginFragment.LoginFragmentListener.
+    This will replace the LoginFragment fragment with RegisterFragment.
+     */
+    @Override
+    public void signUp() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.sign_in_fragment_id, new RegisterFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    /*
+     method declaration of RegisterFragment.RegisterFragmentListener
+     */
+    @Override
+    public void registerSubmit(String firstName, String lastName, String username, String email, String pwd) {
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .commit();
+        displayMainMenuPage();
+    }
+
+    /*
     The declaration of login() from the LoginFragment.LoginFragmentListener.
+    displays the MainMenuActivity.class activity.
      */
     @Override
     public void login(String email, String pwd) {
@@ -61,23 +89,11 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
                 .edit()
                 .putBoolean(getString(R.string.LOGGEDIN), true)
                 .commit();
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    /*
-    The decleration of signUp() form the LoginFragment.LoginFragmentListener.
-     */
-    @Override
-    public void signUp() {
-        Intent i = new Intent(this, SignUpActivity.class);
-        startActivity(i);
+        displayMainMenuPage();
     }
 
     /*
     The method to help load Activity from the LoginFragment.
-    because Fragment alone cannot display Activity.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -86,5 +102,22 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
 
             fragment.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    /*
+    checks login status for facebook with currentToken.
+     */
+    private void checkLoginStatus() {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            displayMainMenuPage();
+        }
+    }
+
+    /*
+    This method starts the MainMenuActivity.class
+     */
+    public void displayMainMenuPage() {
+        Intent i = new Intent(this, MainMenuActivity.class);
+        startActivity(i);
     }
 }
