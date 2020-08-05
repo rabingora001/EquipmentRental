@@ -13,15 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.EquipmentDetailActivity"></activity>
+        <activity android:name=".home.HomePageActivity"></activity>
+        <activity android:name=".main.EquipmentDetailActivity" />
         <activity
             android:name=".main.EquipmentBrowsingActivity"
             android:label="@string/title_activity_equipment_browsing"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".authenticate.SignUpActivity"
-            android:parentActivityName=".authenticate.SignInActivity" />
-
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity -->
+        <!-- android:name=".authenticate.SignUpActivity" -->
+        <!-- android:parentActivityName=".authenticate.SignInActivity" /> -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -50,8 +49,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

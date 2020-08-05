@@ -41,6 +41,13 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="displayHomePage"
+        android:text="home" />
+
     <!--    can also put the logout button for fb-->
     <!--        with these codes-->
     <!--    <com.facebook.login.widget.LoginButton-->

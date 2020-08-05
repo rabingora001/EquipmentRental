@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import de.hdodenhof.circleimageview.CircleImageView;
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.authenticate.SignInActivity;
+import edu.tacoma.uw.equipmentrental.home.HomePageActivity;
 
 /**
  * This is the dashboard page(MainMenuActivity) of our app.
@@ -155,4 +157,14 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent i = new Intent(this, SignInActivity.class);
         startActivity(i);
     }
+
+    /*
+     * Displays the home page.
+     * @param view
+     */
+    public void displayHomePage(View view) {
+        Intent intent = new Intent(this, HomePageActivity.class);
+        startActivity(intent);
+    }
+
 }
