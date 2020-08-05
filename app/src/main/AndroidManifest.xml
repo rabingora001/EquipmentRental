@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.tacoma.uw.equipmentrental">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,6 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".main.EquipmentDetailActivity"></activity>
+        <activity
+            android:name=".main.EquipmentBrowsingActivity"
+            android:label="@string/title_activity_equipment_browsing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".authenticate.SignUpActivity"
+            android:parentActivityName=".authenticate.SignInActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
