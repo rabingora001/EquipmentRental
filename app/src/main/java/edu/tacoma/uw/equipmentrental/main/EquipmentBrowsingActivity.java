@@ -33,6 +33,7 @@ import java.net.URL;
 import java.util.List;
 
 import edu.tacoma.uw.equipmentrental.R;
+import edu.tacoma.uw.equipmentrental.data.EquipmentDB;
 import model.Equipment;
 
 public class EquipmentBrowsingActivity extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
     private boolean mTwoPane;
     private List<Equipment> mEquipmentList;
     private RecyclerView mRecyclerView;
-//    private EquipmentDB mEquipmentDB;
+    private EquipmentDB mEquipmentDB;
 
 
     private void launchEquipmentAddFragment() {
@@ -108,13 +109,13 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
             Toast.makeText(this,
                     "No network connection available. Displaying locally stored data",
                     Toast.LENGTH_SHORT).show();
-//            if (mEquipmentDB == null) {
-//                mEquipmentDB = new EquipmentDB(this);
-//            }
-//            if (mEquipmentList == null) {
-//                mEquipmentList = mEquipmentDB.getCourses();
-//                setupRecyclerView(mRecyclerView);
-//            }
+            if (mEquipmentDB == null) {
+                mEquipmentDB = new EquipmentDB(this);
+            }
+            if (mEquipmentList == null) {
+                mEquipmentList = mEquipmentDB.getEquipment();
+                setupRecyclerView(mRecyclerView);
+            }
         }
     }
 
@@ -266,19 +267,19 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
 
                 if (jsonObject.getBoolean("success")) {
                     mEquipmentList = Equipment.parseEquipmentJson(
-                            jsonObject.getString("equipment")); // changed "names" to "courses"
-//                    if (mEquipmentDB == null) {
-//                        mEquipmentDB = new EquipmentDB(getApplicationContext());
-//                    }
-//
-//                    mEquipmentDB.deleteCourses();
+                            jsonObject.getString("equipment"));
+                    if (mEquipmentDB == null) {
+                        mEquipmentDB = new EquipmentDB(getApplicationContext());
+                    }
 
-//                    for (int i=0; i < mEquipmentList.size(); i++) {
-//                        Equipment equipment = mEquipmentList.get(i);
-//                        mEquipmentDB.insertEquipment(equipment.getmEquipmentEquipment(),
-//                                equipment.getmEquipmentShortDesc(),
-//                                equipment.getmEquipmentPrice();
-//                    }
+//                    mEquipmentDB.deleteEquipment();
+
+                    for (int i=0; i < mEquipmentList.size(); i++) {
+                        Equipment equipment = mEquipmentList.get(i);
+                        mEquipmentDB.insertEquipment(equipment.getmEquipmentEquipment(),
+                                equipment.getmEquipmentShortDesc(),
+                                equipment.getmEquipmentPrice());
+                    }
 
                     if (!mEquipmentList.isEmpty()) {
                         setupRecyclerView((RecyclerView) mRecyclerView);

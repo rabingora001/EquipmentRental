@@ -14,7 +14,7 @@ public class Equipment implements Serializable {
     private String mEquipmentShortDesc;
     private String mEquipmentPrice;
 
-    public static final String EQUIPMENT = "equipment";
+    public static final String EQUIPMENT = "equipmentname";
     public static final String SHORT_DESC = "shortdesc";
     public static final String PRICE = "price";
 

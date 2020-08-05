@@ -12,16 +12,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 import com.facebook.AccessToken;
 
 import edu.tacoma.uw.equipmentrental.R;
+import edu.tacoma.uw.equipmentrental.home.HomePageActivity;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 
 /**
  * This is the main luncher activity for this project.
  */
-public class SignInActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener, RegisterFragment.RegisterFragmentListener {
+public class SignInActivity extends AppCompatActivity
+        implements LoginFragment.LoginFragmentListener, RegisterFragment.RegisterFragmentListener {
 
     //member variable for SharedPreferences
     private SharedPreferences mSharedPreferences;
@@ -120,4 +123,16 @@ public class SignInActivity extends AppCompatActivity implements LoginFragment.L
         Intent i = new Intent(this, MainMenuActivity.class);
         startActivity(i);
     }
+
+
+    /*
+     * Displays the home page.
+     * @param view
+     */
+    public void displayHomePage(View view) {
+        Intent intent = new Intent(this, HomePageActivity.class);
+        startActivity(intent);
+    }
+
+
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    <string name="CREATE_EQUIPMENT_SQL">
+    CREATE TABLE IF NOT EXISTS Equipment
+    (equipmentname TEXT PRIMARY KEY, shortDesc TEXT,
+    price TEXT)
+</string>
+
+    <string name="DROP_EQUIPMENT_SQL">
+    DROP TABLE IF EXISTS Equipment
+</string>
+</resources>

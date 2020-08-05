@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_equipment_detail"
-    style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".main.EquipmentDetailFragment" >
+<TextView
+    android:id="@+id/equipment_detail_equipment"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".main.EquipmentDetailFragment" />
+    android:textIsSelectable="true" />
+<TextView
+    android:id="@+id/equipment_detail_short_desc"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:textIsSelectable="true" />
+<TextView
+    android:id="@+id/equipment_detail_price"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:textIsSelectable="true" />
 
+</LinearLayout>
 
-
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:id="@+id/fragment_equipment_detail"-->
+    <!--    style="?android:attr/textAppearanceLarge"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:padding="16dp"-->
+    <!--    android:textIsSelectable="true" -->
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
