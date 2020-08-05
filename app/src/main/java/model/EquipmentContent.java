@@ -38,4 +38,24 @@ public class EquipmentContent {
         return builder.toString();
     }
 
+    /**
+     * An equipment item representing a piece of content.
+     */
+    public static class EquipmentItem {
+        public final String name;
+        public final String details;
+        public final String price;
+
+        public EquipmentItem(String name, String details, String price) {
+            this.name = name;
+            this.details = details;
+            this.price = price;
+        }
+
+        @Override
+        public String toString() {
+            return details;
+        }
+    }
+
 }
