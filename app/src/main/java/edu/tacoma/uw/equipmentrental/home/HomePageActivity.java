@@ -10,7 +10,9 @@ import com.facebook.AccessToken;
 
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.authenticate.SignInActivity;
+import edu.tacoma.uw.equipmentrental.main.EquipmentAddFragment;
 import edu.tacoma.uw.equipmentrental.main.EquipmentBrowsingActivity;
+import edu.tacoma.uw.equipmentrental.main.EquipmentDetailActivity;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -39,16 +41,33 @@ public class HomePageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    /*
-//checks the facebook login status with Access Token.
-//If logged in loads the user profile.
-// */
-//    private void checkLoginStatus() {
-//        if (AccessToken.getCurrentAccessToken() != null) {
-//            loadUserProfile(AccessToken.getCurrentAccessToken());
-//        }
-//    }
+    /**
+     * This method starts the MainMenuActivity.class
+     * @param view
+     */
+    public void displayMainMenuPage(View view) {
+        Intent i = new Intent(this, MainMenuActivity.class);
+        startActivity(i);
+    }
 
+    /**
+     * This method starts the Equipment Detail Activity
+     * @param view
+     */
+    public void displayEquipmentAddFragement(View view) {
+        launchEquipmentAddFragment();
+    }
+
+
+
+    private void launchEquipmentAddFragment() {
+        EquipmentAddFragment equipmentAddFragment = new EquipmentAddFragment();
+
+            Intent intent = new Intent(this, EquipmentDetailActivity.class);
+            intent.putExtra(EquipmentDetailActivity.ADD_EQUIPMENT, true);
+            startActivity(intent);
+
+    }
 
 
 }

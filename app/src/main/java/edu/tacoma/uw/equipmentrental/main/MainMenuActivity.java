@@ -65,8 +65,9 @@ public class MainMenuActivity extends AppCompatActivity {
         return true;
     }
 
-    /*
-    operates the logout functions from the MenuItem
+    /**
+     * operates the logout functions from the MenuItem.
+     * @param item
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -84,6 +85,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
             //display the SignInActivity.class.
             displaySignInActivityPage();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
