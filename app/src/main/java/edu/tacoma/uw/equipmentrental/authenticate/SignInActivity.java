@@ -42,6 +42,7 @@ public class SignInActivity extends AppCompatActivity
 
     private SharedPreferences mSharedPreferences;
     private JSONObject mLoginJSON;
+    private JSONObject mRegisterJSON;
 
     /*
     displays the SingInActivity with the LoginFragment on top of SignInActivity.
@@ -89,11 +90,10 @@ public class SignInActivity extends AppCompatActivity
      */
     @Override
     public void registerSubmit(String firstName, String lastName, String username, String email, String pwd) {
-        mSharedPreferences
-                .edit()
-                .putBoolean(getString(R.string.LOGGEDIN), true)
-                .commit();
-        displayMainMenuPage();
+
+        register(firstName, lastName, username, email, pwd);
+
+
     }
 
     /*
@@ -158,6 +158,91 @@ public class SignInActivity extends AppCompatActivity
     public void displayHomePage(View view) {
         Intent intent = new Intent(this, HomePageActivity.class);
         startActivity(intent);
+    }
+
+    public void register(String firstName, String lastName, String userName, String email, String pwd) {
+        StringBuilder url = new StringBuilder(getString(R.string.register_url));
+
+        mRegisterJSON = new JSONObject();
+        try {
+            mRegisterJSON.put("first", firstName);
+            mRegisterJSON.put("last", lastName);
+            mRegisterJSON.put("username", userName);
+            mRegisterJSON.put("email", email);
+            mRegisterJSON.put("password", pwd);
+            new RegisterAsyncTask().execute(url.toString());
+
+        } catch (JSONException e) {
+            Toast.makeText(this, "Invalid Registration " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+
+    private class RegisterAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setDoOutput(true);
+                    OutputStreamWriter wr =
+                            new OutputStreamWriter(urlConnection.getOutputStream());
+
+                    wr.write(mRegisterJSON.toString());
+                    wr.flush();
+                    wr.close();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+                } catch (Exception e) {
+                    response = "Unable to register, Reason: "
+                            + e.getMessage();
+                } finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if (s.startsWith("Unable to login")) {
+//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if (jsonObject.getBoolean("success")) {
+                    Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    mSharedPreferences
+                            .edit()
+                            .putBoolean(getString(R.string.LOGGEDIN), true)
+                            .commit();
+                    displayMainMenuPage();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Invalid Registration"
+                            , Toast.LENGTH_SHORT).show();
+
+                }
+            } catch (JSONException e) {
+                Toast.makeText(getApplicationContext(), "Invalid Registration"
+                        , Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private class LoginAsyncTask extends AsyncTask<String, Void, String> {
