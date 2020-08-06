@@ -12,74 +12,74 @@
 
     <ImageView
         android:id="@+id/register_image_id"
-        android:layout_width="244dp"
-        android:layout_height="197dp"
-        android:src="@drawable/equipment_rental_logo"
+        android:layout_width="253dp"
+        android:layout_height="107dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:src="@drawable/equipment_rental_logo" />
 
     <EditText
         android:id="@+id/register_first_name_id"
         android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:hint="First Name"
-        android:inputType="textPersonName"
-        android:layout_gravity="center"/>
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/register_last_name_id"
         android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:hint="Last Name"
-        android:inputType="textPersonName"
-        android:layout_gravity="center"/>
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/register_username_id"
         android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:hint="User Name"
-        android:inputType="textPersonName"
-        android:layout_gravity="center"/>
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/register_email_id"
         android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:layout_gravity="center"/>
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/register_password_id"
         android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_gravity="center" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/register_retype_password_id"
         android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Re-enter Password"
-        android:inputType="textPassword"
-        android:layout_gravity="center" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/register_submit_button_id"
