@@ -1,9 +1,12 @@
 package edu.tacoma.uw.equipmentrental.authenticate;
 
 import android.content.Intent;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,16 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
@@ -53,11 +66,11 @@ public class LoginFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    /*
-    Checks for authentication for custom login and throws toast error message
-    if not authenticate. Calls the login with facebook id for alternate login.
-    OnClick listeners for the login and signup button.
-    If everything is successful, displays the MainMenuActivity.class
+    /**
+     * Checks for authentication for custom login and throws toast error message
+     * if not authenticate. Calls the login with facebook id for alternate login.
+     * OnClick listeners for the login and signup button.
+     * If everything is successful, displays the MainMenuActivity.class
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -129,8 +142,8 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    /*
-    method to callback manager for the facebook login
+    /**
+     * method to callback manager for the facebook login
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -138,13 +151,15 @@ public class LoginFragment extends Fragment {
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    /*
-    method to display the MainMenuActivity.class Activity.
+    /**
+     * method to display the MainMenuActivity.class Activity.
      */
     public void displayMainMenuPage() {
         Intent i = new Intent(getActivity(), MainMenuActivity.class);
         getActivity().startActivity(i);
     }
+
+
 
 
 
