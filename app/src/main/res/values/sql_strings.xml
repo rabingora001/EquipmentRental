@@ -4,8 +4,8 @@
     (equipmentname TEXT PRIMARY KEY, shortDesc TEXT,
     price TEXT)
 </string>
-
     <string name="DROP_EQUIPMENT_SQL">
     DROP TABLE IF EXISTS Equipment
 </string>
+
 </resources>

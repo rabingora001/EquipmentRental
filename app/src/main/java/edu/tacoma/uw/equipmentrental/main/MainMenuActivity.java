@@ -33,7 +33,7 @@ import edu.tacoma.uw.equipmentrental.authenticate.SignInActivity;
 import edu.tacoma.uw.equipmentrental.home.HomePageActivity;
 
 /**
- * This is the dashboard page(MainMenuActivity) of our app.
+ * This is the User Profile page(MainMenuActivity) of our app.
  */
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -41,8 +41,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private TextView mTextName;
     private TextView mTextEmail;
 
-    /*
-    checks for fb login status in this method.
+    /**
+     * checks for fb login status in this method.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
