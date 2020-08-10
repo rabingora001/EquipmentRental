@@ -2,6 +2,7 @@ package edu.tacoma.uw.equipmentrental.authenticate;
 
 import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -40,8 +42,14 @@ import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
  */
 public class LoginFragment extends Fragment {
 
+    private static ProgressBar mProgressBar;
+
+    private SharedPreferences mSharedPreferences;
+
+    private JSONObject mLoginJSON;
+
     //member LoginFragmentListener
-    private LoginFragmentListener mLoginFragmentListener;
+//    private LoginFragmentListener mLoginFragmentListener;
 
     // for fb
     private LoginButton mFbLoginButton;
@@ -52,10 +60,10 @@ public class LoginFragment extends Fragment {
     /*
     Interface for the LoginFragment Listener
      */
-    public interface LoginFragmentListener {
-         void login(String email, String pwd);
-         void signUp();
-    }
+//    public interface LoginFragmentListener {
+//         void login(String email, String pwd);
+//         void signUp();
+//    }
 
     public LoginFragment() {
         // Required empty public constructor
@@ -64,6 +72,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getActivity().setContentView(R.layout.fragment_login);
+//        mProgressBar = getActivity().findViewById(R.id.progressBar);
+//        mProgressBar.setVisibility(View.GONE);
+        mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
     }
 
     /**
@@ -79,7 +91,7 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        mLoginFragmentListener = (LoginFragmentListener) getActivity();
+//        mLoginFragmentListener = (LoginFragmentListener) getActivity();
 
         mCallbackManager = CallbackManager.Factory.create();
 
@@ -88,6 +100,8 @@ public class LoginFragment extends Fragment {
 
 //      Callback registration for fb login
         mFbLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+
+
             @Override
             public void onSuccess(LoginResult loginResult) {
                 displayMainMenuPage();
@@ -125,7 +139,7 @@ public class LoginFragment extends Fragment {
                     pwdText.requestFocus();
 
                 } else {
-                    mLoginFragmentListener.login(email, pwd);
+                    login(email, pwd);
                 }
             }
         });
@@ -135,7 +149,7 @@ public class LoginFragment extends Fragment {
         singUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLoginFragmentListener.signUp();
+                signUp();
             }
         });
 
@@ -160,6 +174,115 @@ public class LoginFragment extends Fragment {
     }
 
 
+    public void login(String email, String pwd) {
+        StringBuilder url = new StringBuilder(getString(R.string.login_url));
+
+        mLoginJSON = new JSONObject();
+        try {
+            mLoginJSON.put("email", email);
+            mLoginJSON.put("password", pwd);
+            new LoginAsyncTask().execute(url.toString());
+
+
+//            new EquipmentDetailActivity.AddEquipmentAsyncTask().execute(url.toString());
+        } catch (JSONException e) {
+            Toast.makeText(getContext(), "Invalid Login: "
+                            + e.getMessage()
+                    , Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+
+    public void signUp() {
+        getFragmentManager().
+                beginTransaction()
+                .replace(R.id.sign_in_fragment_id, new RegisterFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private class LoginAsyncTask extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            publishProgress();
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setDoOutput(true);
+                    OutputStreamWriter wr =
+                            new OutputStreamWriter(urlConnection.getOutputStream());
+
+                    wr.write(mLoginJSON.toString());
+                    wr.flush();
+                    wr.close();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+                } catch (Exception e) {
+                    response = "Unable to login, Reason: "
+                            + e.getMessage();
+                } finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            mProgressBar.setVisibility(View.GONE);
+            if (s.startsWith("Unable to login")) {
+//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if (jsonObject.getBoolean("success")) {
+                    mSharedPreferences
+                            .edit()
+                            .putBoolean(getString(R.string.LOGGEDIN), true)
+                            .commit();
+                    displayMainMenuPage();
+
+                }
+                else {
+                    Toast.makeText(getContext(), "Invalid Login"
+                            , Toast.LENGTH_SHORT).show();
+
+                }
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "Invalid Login"
+                        , Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... progress) {
+
+            mProgressBar = getActivity().findViewById(R.id.progressBar);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setProgress(10);
+        }
+
+
+    }
 
 
 

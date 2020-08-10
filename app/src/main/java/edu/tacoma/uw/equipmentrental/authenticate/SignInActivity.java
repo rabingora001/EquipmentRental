@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -38,10 +39,10 @@ import model.Equipment;
  * This is the main luncher activity for this project.
  */
 public class SignInActivity extends AppCompatActivity
-        implements LoginFragment.LoginFragmentListener, RegisterFragment.RegisterFragmentListener {
+        implements RegisterFragment.RegisterFragmentListener {
 
     private SharedPreferences mSharedPreferences;
-    private JSONObject mLoginJSON;
+
     private JSONObject mRegisterJSON;
 
     /*
@@ -72,18 +73,6 @@ public class SignInActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * The declaration of signUp() form the LoginFragment.LoginFragmentListener.
-     * This will replace the LoginFragment fragment with RegisterFragment.
-     */
-    @Override
-    public void signUp() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.sign_in_fragment_id, new RegisterFragment())
-                .addToBackStack(null)
-                .commit();
-    }
 
     /*
      method declaration of RegisterFragment.RegisterFragmentListener
@@ -96,30 +85,8 @@ public class SignInActivity extends AppCompatActivity
 
     }
 
-    /*
-    The declaration of login() from the LoginFragment.LoginFragmentListener.
-    displays the MainMenuActivity.class activity.
-     */
-    @Override
-    public void login(String email, String pwd) {
-        StringBuilder url = new StringBuilder(getString(R.string.login_url));
-
-        mLoginJSON = new JSONObject();
-        try {
-            mLoginJSON.put("email", email);
-            mLoginJSON.put("password", pwd);
-            new LoginAsyncTask().execute(url.toString());
 
 
-//            new EquipmentDetailActivity.AddEquipmentAsyncTask().execute(url.toString());
-        } catch (JSONException e) {
-            Toast.makeText(this, "Invalid Login: "
-                            + e.getMessage()
-                    , Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
 
     /*
     The method to help load Activity from the LoginFragment.
@@ -245,70 +212,7 @@ public class SignInActivity extends AppCompatActivity
         }
     }
 
-    private class LoginAsyncTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            String response = "";
-            HttpURLConnection urlConnection = null;
-            for (String url : urls) {
-                try {
-                    URL urlObject = new URL(url);
-                    urlConnection = (HttpURLConnection) urlObject.openConnection();
-                    urlConnection.setRequestMethod("POST");
-                    urlConnection.setRequestProperty("Content-Type", "application/json");
-                    urlConnection.setDoOutput(true);
-                    OutputStreamWriter wr =
-                            new OutputStreamWriter(urlConnection.getOutputStream());
 
-                    wr.write(mLoginJSON.toString());
-                    wr.flush();
-                    wr.close();
-
-                    InputStream content = urlConnection.getInputStream();
-
-                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                    String s = "";
-                    while ((s = buffer.readLine()) != null) {
-                        response += s;
-                    }
-                } catch (Exception e) {
-                    response = "Unable to login, Reason: "
-                            + e.getMessage();
-                } finally {
-                    if (urlConnection != null)
-                        urlConnection.disconnect();
-                }
-            }
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            if (s.startsWith("Unable to login")) {
-//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-                if (jsonObject.getBoolean("success")) {
-                    mSharedPreferences
-                            .edit()
-                            .putBoolean(getString(R.string.LOGGEDIN), true)
-                            .commit();
-                    displayMainMenuPage();
-
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Invalid Login"
-                            , Toast.LENGTH_SHORT).show();
-
-                }
-            } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Invalid Login"
-                        , Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
 
 }
