@@ -14,6 +14,7 @@ import edu.tacoma.uw.equipmentrental.main.EquipmentAddFragment;
 import edu.tacoma.uw.equipmentrental.main.EquipmentBrowsingActivity;
 import edu.tacoma.uw.equipmentrental.main.EquipmentDetailActivity;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
+import edu.tacoma.uw.equipmentrental.maps.MapsActivity;
 
 public class HomePageActivity extends AppCompatActivity {
 
@@ -56,6 +57,16 @@ public class HomePageActivity extends AppCompatActivity {
      */
     public void displayEquipmentAddFragement(View view) {
         launchEquipmentAddFragment();
+    }
+
+
+    /**
+     * This method starts the MapsActivity.class
+     * @param view
+     */
+    public void displayMapPage(View view) {
+        Intent i = new Intent(this, MapsActivity.class);
+        startActivity(i);
     }
 
 
