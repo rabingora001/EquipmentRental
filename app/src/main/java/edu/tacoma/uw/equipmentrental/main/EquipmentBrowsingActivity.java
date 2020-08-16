@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private EquipmentDB mEquipmentDB;
 
+    private static ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +58,10 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+        toolbar.setTitle("Rental Equipment List");
+//        getSupportActionBar().setIcon(R.drawable.equipment_rental_logo);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -289,6 +295,17 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "JSON Error: " + e.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
+        }
+
+        /**
+         * progress bar to display the loading progress.
+         * @param progress
+         */
+        @Override
+        protected void onProgressUpdate(Void... progress) {
+            mProgressBar = findViewById(R.id.loading_progressBar_id);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setProgress(10);
         }
     }
 }

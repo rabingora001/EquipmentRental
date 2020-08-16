@@ -45,7 +45,7 @@ public class EquipmentDetailActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Message the renter", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Message the renter. don't do anything for now", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

@@ -16,20 +16,13 @@
         android:textSize="30dp" />
 
     <!-- <de.hdodenhof.circleimageview.CircleImageView-->
+
     <ImageView
         android:id="@+id/profile_pic_id"
         android:layout_width="175dp"
         android:layout_height="175dp"
         android:layout_gravity="center_horizontal"
-        android:background="#E6E0E0"
-        android:foreground="@drawable/com_facebook_profile_picture_blank_portrait" />
-
-    <Button
-        android:id="@+id/btn_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="displayHomePage"
-        android:text="home" />
+        android:background="#E6E0E0" />
 
     <TextView
         android:id="@+id/profile_name_id"
@@ -48,6 +41,13 @@
         android:gravity="center"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="displayHomePage"
+        android:text="Home page" />
 
     <!--    can also put the logout button for fb-->
     <!--        with these codes-->
