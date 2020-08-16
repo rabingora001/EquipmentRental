@@ -82,17 +82,15 @@ public class EquipmentDB {
         return list;
     }
 
-
-
-
+    /**
+     * Helper class for the Equipment
+     */
     class EquipmentDBHelper extends SQLiteOpenHelper {
 
         private final String CREATE_EQUIPMENT_SQL;
-
         private final String DROP_EQUIPMENT_SQL;
 
-
-
+        //contructor method
         public EquipmentDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
             CREATE_EQUIPMENT_SQL = context.getString(R.string.CREATE_EQUIPMENT_SQL);

@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.facebook.AccessToken;
+
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -48,14 +47,8 @@ public class LoginFragment extends Fragment {
 
     private JSONObject mLoginJSON;
 
-    //member LoginFragmentListener
+
 //    private LoginFragmentListener mLoginFragmentListener;
-
-    // for fb
-    private LoginButton mFbLoginButton;
-    CallbackManager mCallbackManager;
-
-    private boolean mIsCustomLogin;
 
     /*
     Interface for the LoginFragment Listener
@@ -64,6 +57,15 @@ public class LoginFragment extends Fragment {
 //         void login(String email, String pwd);
 //         void signUp();
 //    }
+
+
+    // for fb
+    private LoginButton mFbLoginButton;
+    CallbackManager mCallbackManager;
+
+    private boolean mIsCustomLogin;
+
+
 
     public LoginFragment() {
         // Required empty public constructor
@@ -98,7 +100,7 @@ public class LoginFragment extends Fragment {
         mFbLoginButton = view.findViewById(R.id.fb_sign_in_btn_id1);
         mFbLoginButton.setPermissions(Arrays.asList("email", "public_profile"));
 
-//      Callback registration for fb login
+        //Callback registration for fb login
         mFbLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
 
 
@@ -118,6 +120,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        //custom login
         final EditText emailText = view.findViewById(R.id.sign_in_email_id);
         final EditText pwdText = view.findViewById(R.id.sign_in_password_id);
         //sign In button click listener
@@ -174,6 +177,15 @@ public class LoginFragment extends Fragment {
     }
 
 
+    public void signUp() {
+        getFragmentManager().
+                beginTransaction()
+                .replace(R.id.signInActivity_fragmentPlaceholder_id, new RegisterFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+
     public void login(String email, String pwd) {
         StringBuilder url = new StringBuilder(getString(R.string.login_url));
 
@@ -183,29 +195,12 @@ public class LoginFragment extends Fragment {
             mLoginJSON.put("password", pwd);
             new LoginAsyncTask().execute(url.toString());
 
-
-//            new EquipmentDetailActivity.AddEquipmentAsyncTask().execute(url.toString());
         } catch (JSONException e) {
-            Toast.makeText(getContext(), "Invalid Login: "
-                            + e.getMessage()
-                    , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Invalid Login: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-
-    }
-
-
-    public void signUp() {
-        getFragmentManager().
-                beginTransaction()
-                .replace(R.id.sign_in_fragment_id, new RegisterFragment())
-                .addToBackStack(null)
-                .commit();
     }
 
     private class LoginAsyncTask extends AsyncTask<String, Void, String> {
-
-
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -247,7 +242,7 @@ public class LoginFragment extends Fragment {
         protected void onPostExecute(String s) {
             mProgressBar.setVisibility(View.GONE);
             if (s.startsWith("Unable to login")) {
-//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -260,30 +255,27 @@ public class LoginFragment extends Fragment {
                             .commit();
                     displayMainMenuPage();
 
-                }
-                else {
+                } else {
                     Toast.makeText(getContext(), "Invalid Login"
                             , Toast.LENGTH_SHORT).show();
 
                 }
             } catch (JSONException e) {
-                Toast.makeText(getContext(), "Invalid Login"
+                Toast.makeText(getContext(), "Not valid Login"
                         , Toast.LENGTH_SHORT).show();
             }
         }
 
-
+        /**
+         * progress bar to display the loading progress.
+         * @param progress
+         */
         @Override
         protected void onProgressUpdate(Void... progress) {
-
-            mProgressBar = getActivity().findViewById(R.id.progressBar);
+            mProgressBar = getActivity().findViewById(R.id.login_progressBar);
             mProgressBar.setVisibility(View.VISIBLE);
             mProgressBar.setProgress(10);
         }
-
-
     }
-
-
 
 }

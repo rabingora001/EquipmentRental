@@ -36,7 +36,6 @@ dependencies {
     //for facebook login
     implementation 'com.facebook.android:facebook-login:5.15.3'
     //for facebook sharing
-    compile 'com.facebook.android:facebook-share:[5,6)'
     implementation 'com.facebook.android:facebook-share:[5,6)'
     //circular image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'

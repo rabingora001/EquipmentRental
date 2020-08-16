@@ -48,20 +48,6 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private EquipmentDB mEquipmentDB;
 
-
-    private void launchEquipmentAddFragment() {
-        EquipmentAddFragment equipmentAddFragment = new EquipmentAddFragment();
-        if (mTwoPane) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.item_detail_container, equipmentAddFragment)
-                    .commit();
-        } else {
-            Intent intent = new Intent(this, EquipmentDetailActivity.class);
-            intent.putExtra(EquipmentDetailActivity.ADD_EQUIPMENT, true);
-            startActivity(intent);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +62,6 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 launchEquipmentAddFragment();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
 
@@ -94,6 +78,19 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) mRecyclerView);
     }
 
+    private void launchEquipmentAddFragment() {
+        EquipmentAddFragment equipmentAddFragment = new EquipmentAddFragment();
+        if (mTwoPane) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.item_detail_container, equipmentAddFragment)
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, EquipmentDetailActivity.class);
+            intent.putExtra(EquipmentDetailActivity.ADD_EQUIPMENT, true);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -104,8 +101,7 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
             if (mEquipmentList == null) {
                 new EquipmentTask().execute(getString(R.string.get_equipment));
             }
-        }
-        else {
+        } else {
             Toast.makeText(this,
                     "No network connection available. Displaying locally stored data",
                     Toast.LENGTH_SHORT).show();
@@ -272,8 +268,11 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
                         mEquipmentDB = new EquipmentDB(getApplicationContext());
                     }
 
-//                    mEquipmentDB.deleteEquipment();
+                    // Delete old data so that you can refresh the local
+                    // database with the network data.
+                    mEquipmentDB.deleteEquipment();
 
+                    // Also, add to the local database
                     for (int i=0; i < mEquipmentList.size(); i++) {
                         Equipment equipment = mEquipmentList.get(i);
                         mEquipmentDB.insertEquipment(equipment.getmEquipmentEquipment(),

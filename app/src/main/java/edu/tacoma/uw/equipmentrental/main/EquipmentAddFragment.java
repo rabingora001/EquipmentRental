@@ -60,10 +60,6 @@ public class EquipmentAddFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAddListener = (AddListener) getActivity();
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
@@ -76,6 +72,7 @@ public class EquipmentAddFragment extends Fragment {
         final EditText equipmentEquipmentEditText = v.findViewById(R.id.add_equipment_equipment);
         final EditText equipmentShortDescEditText = v.findViewById(R.id.add_equipment_short_desc);
         final EditText equipmentPriceEditText = v.findViewById(R.id.add_equipment_price);
+
         Button addButton = v.findViewById(R.id.btn_add_equipment);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,6 +18,7 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/equipment_rental_logo" />
 
+
     <EditText
         android:id="@+id/register_first_name_id"
         android:layout_width="220dp"
@@ -88,5 +89,13 @@
         android:layout_marginTop="36dp"
         android:text="Submit"
         android:layout_gravity="center" />
+
+    <ProgressBar
+        android:id="@+id/register_progressBar"
+        android:layout_width="207dp"
+        android:layout_height="129dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:visibility="invisible" />
 
 </LinearLayout>
