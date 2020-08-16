@@ -83,6 +83,8 @@ public class EquipmentAddFragment extends Fragment {
                 Equipment equipment = new Equipment(equipmentEquipment, equipmentShortDesc, equipmentPrice);
                 if (mAddListener != null) {
                     mAddListener.addEquipment(equipment);
+
+
                 }
             }
         });

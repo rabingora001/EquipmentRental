@@ -171,6 +171,9 @@ public class EquipmentDetailActivity extends AppCompatActivity
                 if (jsonObject.getBoolean("success")) {
                     Toast.makeText(getApplicationContext(), "Equipment Added successfully"
                             , Toast.LENGTH_SHORT).show();
+
+                    //go back to equipment list page
+                    displayEquipmentBrowsingPage();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Equipment couldn't be added: "
@@ -187,5 +190,9 @@ public class EquipmentDetailActivity extends AppCompatActivity
         }
     }
 
+    public void displayEquipmentBrowsingPage() {
+        Intent i = new Intent(this, EquipmentBrowsingActivity.class);
+        startActivity(i);
+    }
 
 }
