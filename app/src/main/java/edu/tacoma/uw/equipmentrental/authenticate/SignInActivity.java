@@ -41,7 +41,6 @@ public class SignInActivity extends AppCompatActivity
 
     private SharedPreferences mSharedPreferences;
     private static ProgressBar mProgressBar;
-
     private JSONObject mRegisterJSON;
 
     /*
@@ -79,8 +78,10 @@ public class SignInActivity extends AppCompatActivity
     @Override
     public void registerSubmit(String firstName, String lastName, String username, String userAddress, String email, String pwd) {
 
-        register(firstName, lastName, username, userAddress, email, pwd);
 
+
+        //register method
+        register(firstName, lastName, username, userAddress, email, pwd);
     }
 
 

@@ -88,6 +88,8 @@ public class EquipmentDetailFragment extends Fragment {
             }
         });
 
+
+
         return rootView;
     }
 }

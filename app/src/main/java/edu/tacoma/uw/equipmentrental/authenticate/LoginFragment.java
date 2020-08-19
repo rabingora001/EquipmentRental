@@ -142,6 +142,15 @@ public class LoginFragment extends Fragment {
                     pwdText.requestFocus();
 
                 } else {
+                    //
+                    mSharedPreferences
+                            .edit()
+                            .putBoolean(getString(R.string.LOGGEDIN), true)
+                            .commit();
+                    displayMainMenuPage();
+                    //store the email in shared preference session.
+                    mSharedPreferences.edit().putString("email", email).commit();
+                    //run the login check in heroku backend
                     login(email, pwd);
                 }
             }
@@ -249,11 +258,6 @@ public class LoginFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
-                    mSharedPreferences
-                            .edit()
-                            .putBoolean(getString(R.string.LOGGEDIN), true)
-                            .commit();
-                    displayMainMenuPage();
 
                 } else {
                     Toast.makeText(getContext(), "Invalid Login"

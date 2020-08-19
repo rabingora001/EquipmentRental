@@ -25,24 +25,25 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/loading_progressBar_id"
-            android:layout_width="61dp"
-            android:layout_height="72dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:visibility="invisible" />
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <include layout="@layout/item_list" />
+            <ProgressBar
+                android:id="@+id/loading_progressBar_id"
+                android:layout_width="61dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:visibility="invisible" />
 
-    </FrameLayout>
+            <include layout="@layout/item_list" />
+
+        </FrameLayout>
 
     </ScrollView>
 
