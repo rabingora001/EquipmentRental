@@ -69,6 +69,7 @@ public class EquipmentDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.equipment_detail_equipment)).setText(mEquipment.getmEquipmentEquipment());
             ((TextView) rootView.findViewById(R.id.equipment_detail_short_desc)).setText(mEquipment.getmEquipmentShortDesc());
             ((TextView) rootView.findViewById(R.id.equipment_detail_price)).setText(mEquipment.getmEquipmentPrice());
+            ((TextView) rootView.findViewById(R.id.equipment_detail_email)).setText(mEquipment.getmEquipmentEmail());
         }
 
         //share button for sharing equitment details.

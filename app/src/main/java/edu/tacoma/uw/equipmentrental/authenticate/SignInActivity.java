@@ -77,9 +77,9 @@ public class SignInActivity extends AppCompatActivity
      method declaration of RegisterFragment.RegisterFragmentListener
      */
     @Override
-    public void registerSubmit(String firstName, String lastName, String username, String email, String pwd) {
+    public void registerSubmit(String firstName, String lastName, String username, String userAddress, String email, String pwd) {
 
-        register(firstName, lastName, username, email, pwd);
+        register(firstName, lastName, username, userAddress, email, pwd);
 
     }
 
@@ -125,7 +125,7 @@ public class SignInActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void register(String firstName, String lastName, String userName, String email, String pwd) {
+    public void register(String firstName, String lastName, String userName, String userAddress, String email, String pwd) {
         StringBuilder url = new StringBuilder(getString(R.string.register_url));
 
         mRegisterJSON = new JSONObject();
@@ -133,6 +133,7 @@ public class SignInActivity extends AppCompatActivity
             mRegisterJSON.put("first", firstName);
             mRegisterJSON.put("last", lastName);
             mRegisterJSON.put("username", userName);
+            mRegisterJSON.put("address", userAddress);
             mRegisterJSON.put("email", email);
             mRegisterJSON.put("password", pwd);
             new RegisterAsyncTask().execute(url.toString());

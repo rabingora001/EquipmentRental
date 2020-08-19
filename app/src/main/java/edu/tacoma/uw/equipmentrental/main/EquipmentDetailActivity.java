@@ -111,8 +111,8 @@ public class EquipmentDetailActivity extends AppCompatActivity
         try {
             mEquipmentJSON.put(Equipment.EQUIPMENT, equipment.getmEquipmentEquipment());
             mEquipmentJSON.put(Equipment.SHORT_DESC, equipment.getmEquipmentShortDesc());
-            mEquipmentJSON.put(Equipment.PRICE, equipment.getmEquipmentPrice()
-            );
+            mEquipmentJSON.put(Equipment.PRICE, equipment.getmEquipmentPrice());
+            mEquipmentJSON.put(Equipment.EMAiL, equipment.getmEquipmentEmail());
             new AddEquipmentAsyncTask().execute(url.toString());
         } catch (JSONException e) {
             Toast.makeText(this, "Error with JSON creation on adding equipment: "

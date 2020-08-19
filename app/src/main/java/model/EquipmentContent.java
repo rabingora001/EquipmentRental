@@ -26,7 +26,7 @@ public class EquipmentContent {
 
     private static Equipment createEquipmentItem(int position) {
         return new Equipment("Equipment" + position, "short desc" + position
-                , "Price" + position);
+                , "Price" + position, "Email" + position);
     }
 
     private static String makeDetails(int position) {

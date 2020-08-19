@@ -23,6 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="price to rent" />
+  
+    <EditText
+        android:id="@+id/add_equipment_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
     <Button
         android:id="@+id/btn_add_equipment"
         android:layout_width="wrap_content"
