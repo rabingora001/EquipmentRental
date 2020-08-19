@@ -44,7 +44,7 @@ public class RegisterFragment extends Fragment {
      * interface for submit button listener
      */
     public interface RegisterFragmentListener{
-        public void registerSubmit(String firstName, String lastName, String username, String email, String pwd);
+        public void registerSubmit(String firstName, String lastName, String username, String address, String email, String pwd);
 
     }
     public RegisterFragment() {
@@ -74,6 +74,7 @@ public class RegisterFragment extends Fragment {
         final EditText firstNameText = view.findViewById(R.id.register_first_name_id);
         final EditText lastNameText = view.findViewById(R.id.register_last_name_id);
         final EditText usernameText = view.findViewById(R.id.register_username_id);
+        final EditText userAddressText = view.findViewById(R.id.register_address_id);
         final EditText emailText = view.findViewById(R.id.register_email_id);
         final EditText passwordText = view.findViewById(R.id.register_password_id);
         final EditText retypedPasswordText = view.findViewById(R.id.register_retype_password_id);
@@ -85,6 +86,7 @@ public class RegisterFragment extends Fragment {
                 String firstName = firstNameText.getText().toString();
                 String lastName = lastNameText.getText().toString();
                 String username = usernameText.getText().toString();
+                String userAddress = userAddressText.getText().toString();
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
                 String retypedPassword = retypedPasswordText.getText().toString();
@@ -104,6 +106,11 @@ public class RegisterFragment extends Fragment {
                             Toast.LENGTH_SHORT).show();
                     usernameText.requestFocus();
 
+                } else if (TextUtils.isEmpty(userAddress) || userAddress.length() < 6) {
+                    Toast.makeText(v.getContext(), "Enter valid Address with at least 6 characters",
+                            Toast.LENGTH_SHORT).show();
+                    userAddressText.requestFocus();
+
                 } else if (TextUtils.isEmpty(email) || !email.contains("@")) {
                     Toast.makeText(v.getContext(), "Enter Valid Email ID", Toast.LENGTH_SHORT).show();
                     emailText.requestFocus();
@@ -119,7 +126,7 @@ public class RegisterFragment extends Fragment {
                     passwordText.requestFocus();
 
                 } else {
-                    mRegisterFragmentListener.registerSubmit(firstName, lastName, username, email, password);
+                    mRegisterFragmentListener.registerSubmit(firstName, lastName, username, userAddress, email, password);
 
 
                 }

@@ -30,13 +30,15 @@ public class EquipmentDB {
      * @param equipmentname
      * @param shortDesc
      * @param price
+     * @param email
      * @return true or false
      */
-    public boolean insertEquipment(String equipmentname, String shortDesc, String price) {
+    public boolean insertEquipment(String equipmentname, String shortDesc, String price, String email) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("equipmentname", equipmentname);
         contentValues.put("shortDesc", shortDesc);
         contentValues.put("price", price);
+        contentValues.put("Email", email);
 
         long rowId = mSQLiteDatabase.insert("Equipment", null, contentValues);
         return rowId != -1;
@@ -56,7 +58,7 @@ public class EquipmentDB {
     public List<Equipment> getEquipment() {
 
         String[] columns = {
-                "equipmentname", "shortDesc", "price"
+                "equipmentname", "shortDesc", "price", "Email"
         };
 
         Cursor c = mSQLiteDatabase.query(
@@ -74,7 +76,8 @@ public class EquipmentDB {
             String equipmentname = c.getString(0);
             String shortDesc = c.getString(1);
             String price = c.getString(2);
-            Equipment equipment = new Equipment(equipmentname, shortDesc, price);
+            String email = c.getString(3);
+            Equipment equipment = new Equipment(equipmentname, shortDesc, price, email);
             list.add(equipment);
             c.moveToNext();
         }

@@ -49,6 +49,17 @@
         android:inputType="textPersonName" />
 
     <EditText
+        android:id="@+id/register_address_id"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="Address"
+        android:inputType="textPostalAddress" />
+
+    <EditText
         android:id="@+id/register_email_id"
         android:layout_width="220dp"
         android:layout_height="30dp"

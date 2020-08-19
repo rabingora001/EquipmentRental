@@ -278,7 +278,8 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
                         Equipment equipment = mEquipmentList.get(i);
                         mEquipmentDB.insertEquipment(equipment.getmEquipmentEquipment(),
                                 equipment.getmEquipmentShortDesc(),
-                                equipment.getmEquipmentPrice());
+                                equipment.getmEquipmentPrice(),
+                                equipment.getmEquipmentEmail());
                     }
 
                     if (!mEquipmentList.isEmpty()) {

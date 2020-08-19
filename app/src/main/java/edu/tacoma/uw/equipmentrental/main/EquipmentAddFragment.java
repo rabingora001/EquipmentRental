@@ -76,6 +76,7 @@ public class EquipmentAddFragment extends Fragment {
         final EditText equipmentEquipmentEditText = v.findViewById(R.id.add_equipment_equipment);
         final EditText equipmentShortDescEditText = v.findViewById(R.id.add_equipment_short_desc);
         final EditText equipmentPriceEditText = v.findViewById(R.id.add_equipment_price);
+        final EditText equipmentEmailEditText = v.findViewById(R.id.add_equipment_email);
         Button addButton = v.findViewById(R.id.btn_add_equipment);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +84,8 @@ public class EquipmentAddFragment extends Fragment {
                 String equipmentEquipment = equipmentEquipmentEditText.getText().toString();
                 String equipmentShortDesc = equipmentShortDescEditText.getText().toString();
                 String equipmentPrice = equipmentPriceEditText.getText().toString();
-                Equipment equipment = new Equipment(equipmentEquipment, equipmentShortDesc, equipmentPrice);
+                String equipmentEmail = equipmentEmailEditText.getText().toString();
+                Equipment equipment = new Equipment(equipmentEquipment, equipmentShortDesc, equipmentPrice, equipmentEmail);
                 if (mAddListener != null) {
                     mAddListener.addEquipment(equipment);
                 }
