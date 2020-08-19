@@ -60,10 +60,6 @@ public class EquipmentAddFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAddListener = (AddListener) getActivity();
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
@@ -88,6 +84,8 @@ public class EquipmentAddFragment extends Fragment {
                 Equipment equipment = new Equipment(equipmentEquipment, equipmentShortDesc, equipmentPrice, equipmentEmail);
                 if (mAddListener != null) {
                     mAddListener.addEquipment(equipment);
+
+
                 }
             }
         });

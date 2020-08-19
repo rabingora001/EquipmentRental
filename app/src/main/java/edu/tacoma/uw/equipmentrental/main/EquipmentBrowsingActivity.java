@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,19 +49,7 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private EquipmentDB mEquipmentDB;
 
-
-    private void launchEquipmentAddFragment() {
-        EquipmentAddFragment equipmentAddFragment = new EquipmentAddFragment();
-        if (mTwoPane) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.item_detail_container, equipmentAddFragment)
-                    .commit();
-        } else {
-            Intent intent = new Intent(this, EquipmentDetailActivity.class);
-            intent.putExtra(EquipmentDetailActivity.ADD_EQUIPMENT, true);
-            startActivity(intent);
-        }
-    }
+    private static ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +58,16 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+        toolbar.setTitle("Rental Equipment List");
+//        getSupportActionBar().setIcon(R.drawable.equipment_rental_logo);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchEquipmentAddFragment();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
 
@@ -94,6 +84,19 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) mRecyclerView);
     }
 
+    private void launchEquipmentAddFragment() {
+        EquipmentAddFragment equipmentAddFragment = new EquipmentAddFragment();
+        if (mTwoPane) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.item_detail_container, equipmentAddFragment)
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, EquipmentDetailActivity.class);
+            intent.putExtra(EquipmentDetailActivity.ADD_EQUIPMENT, true);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -104,8 +107,7 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
             if (mEquipmentList == null) {
                 new EquipmentTask().execute(getString(R.string.get_equipment));
             }
-        }
-        else {
+        } else {
             Toast.makeText(this,
                     "No network connection available. Displaying locally stored data",
                     Toast.LENGTH_SHORT).show();
@@ -272,8 +274,11 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
                         mEquipmentDB = new EquipmentDB(getApplicationContext());
                     }
 
-//                    mEquipmentDB.deleteEquipment();
+                    // Delete old data so that you can refresh the local
+                    // database with the network data.
+                    mEquipmentDB.deleteEquipment();
 
+                    // Also, add to the local database
                     for (int i=0; i < mEquipmentList.size(); i++) {
                         Equipment equipment = mEquipmentList.get(i);
                         mEquipmentDB.insertEquipment(equipment.getmEquipmentEquipment(),
@@ -291,6 +296,17 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "JSON Error: " + e.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
+        }
+
+        /**
+         * progress bar to display the loading progress.
+         * @param progress
+         */
+        @Override
+        protected void onProgressUpdate(Void... progress) {
+            mProgressBar = findViewById(R.id.loading_progressBar_id);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setProgress(10);
         }
     }
 }

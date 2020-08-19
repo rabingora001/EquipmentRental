@@ -31,9 +31,7 @@ import java.net.URL;
 
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.home.HomePageActivity;
-import edu.tacoma.uw.equipmentrental.main.EquipmentDetailActivity;
 import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
-import model.Equipment;
 
 /**
  * This is the main luncher activity for this project.
@@ -42,6 +40,7 @@ public class SignInActivity extends AppCompatActivity
         implements RegisterFragment.RegisterFragmentListener {
 
     private SharedPreferences mSharedPreferences;
+    private static ProgressBar mProgressBar;
 
     private JSONObject mRegisterJSON;
 
@@ -66,7 +65,7 @@ public class SignInActivity extends AppCompatActivity
             //lunch the login fragment
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.sign_in_fragment_id, new LoginFragment())
+                    .add(R.id.signInActivity_fragmentPlaceholder_id, new LoginFragment())
                     .commit();
         } else {
             displayMainMenuPage();
@@ -81,7 +80,6 @@ public class SignInActivity extends AppCompatActivity
     public void registerSubmit(String firstName, String lastName, String username, String userAddress, String email, String pwd) {
 
         register(firstName, lastName, username, userAddress, email, pwd);
-
 
     }
 
@@ -141,7 +139,7 @@ public class SignInActivity extends AppCompatActivity
             new RegisterAsyncTask().execute(url.toString());
 
         } catch (JSONException e) {
-            Toast.makeText(this, "Invalid Registration " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalid Registration!!!!" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -187,8 +185,8 @@ public class SignInActivity extends AppCompatActivity
 
         @Override
         protected void onPostExecute(String s) {
-            if (s.startsWith("Unable to login")) {
-//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+            if (s.startsWith("Unable to register")) {
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
@@ -202,15 +200,27 @@ public class SignInActivity extends AppCompatActivity
                     displayMainMenuPage();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Invalid Registration"
+                    Toast.makeText(getApplicationContext(), "Not valid Registration"
                             , Toast.LENGTH_SHORT).show();
 
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Invalid Registration"
+                Toast.makeText(getApplicationContext(), "Invalid Registration!"
                         , Toast.LENGTH_SHORT).show();
             }
         }
+
+        /**
+         * progress bar for loading process.
+         * @param progress
+         */
+        @Override
+        protected void onProgressUpdate(Void... progress) {
+            mProgressBar = findViewById(R.id.register_progressBar);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setProgress(10);
+        }
+
     }
 
 

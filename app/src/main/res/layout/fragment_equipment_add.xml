@@ -9,27 +9,32 @@
     <EditText
         android:id="@+id/add_equipment_equipment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-<!--        android:hint="@string/enter_course_id_hint" />-->
+        android:layout_height="wrap_content"
+        android:hint="equipment name" />
+
     <EditText
         android:id="@+id/add_equipment_short_desc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-<!--        android:hint="@string/enter_course_short_desc_hint" />-->
+        android:layout_height="wrap_content"
+        android:hint="equipment short description" />
+
     <EditText
         android:id="@+id/add_equipment_price"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-<!--        android:hint="@string/enter_course_prereqs_hint" />-->
+        android:layout_height="wrap_content"
+        android:hint="price to rent" />
+  
     <EditText
         android:id="@+id/add_equipment_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
     <Button
         android:id="@+id/btn_add_equipment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end" />
-<!--        android:text="@string/btn_add_course" />-->
+        android:layout_gravity="end"
+        android:text="add rental equipment"/>
 
 </LinearLayout>

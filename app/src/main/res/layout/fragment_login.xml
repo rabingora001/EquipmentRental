@@ -8,6 +8,14 @@
     android:background="#FFCE9F"
     tools:context=".authenticate.LoginFragment">
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -22,11 +30,12 @@
             android:src="@drawable/equipment_rental_logo" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="207dp"
-            android:visibility="invisible"
-            android:layout_weight="1" />
+            android:id="@+id/login_progressBar"
+            android:layout_width="76dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:visibility="invisible" />
 
     </FrameLayout>
 
@@ -88,6 +97,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="4dp"
         android:text="SIGN UP" />
+
+    </LinearLayout>
+</ScrollView>
 
 
 </LinearLayout>

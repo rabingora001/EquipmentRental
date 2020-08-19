@@ -1,6 +1,7 @@
 package edu.tacoma.uw.equipmentrental.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -49,8 +51,6 @@ public class EquipmentDetailFragment extends Fragment {
             // to load content from a content provider.
             mEquipment = (Equipment) getArguments().getSerializable(ARG_ITEM_ID);
 
-//                    EquipmentContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
@@ -64,13 +64,29 @@ public class EquipmentDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_equipment_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
+        // Show the equipment content as text in a TextView.
         if (mEquipment != null) {
             ((TextView) rootView.findViewById(R.id.equipment_detail_equipment)).setText(mEquipment.getmEquipmentEquipment());
             ((TextView) rootView.findViewById(R.id.equipment_detail_short_desc)).setText(mEquipment.getmEquipmentShortDesc());
             ((TextView) rootView.findViewById(R.id.equipment_detail_price)).setText(mEquipment.getmEquipmentPrice());
             ((TextView) rootView.findViewById(R.id.equipment_detail_email)).setText(mEquipment.getmEquipmentEmail());
         }
+
+        //share button for sharing equitment details.
+        Button shareBtn = rootView.findViewById(R.id.btn_share);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/Plain");
+                String shareTitle = mEquipment.getmEquipmentEquipment();
+                String shareDetails = "Description: " + mEquipment.getmEquipmentShortDesc() + "\n Rent Price: "
+                                    + mEquipment.getmEquipmentPrice();
+                intent.putExtra(Intent.EXTRA_SUBJECT, shareTitle);
+                intent.putExtra(Intent.EXTRA_SUBJECT, shareDetails);
+                getActivity().startActivity(Intent.createChooser(intent, "Share your rent item on:"));
+            }
+        });
 
         return rootView;
     }
