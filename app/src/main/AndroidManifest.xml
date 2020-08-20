@@ -39,6 +39,7 @@
         <activity
             android:name=".main.EquipmentBrowsingActivity"
             android:label="@string/title_activity_equipment_browsing"
+            android:parentActivityName=".home.HomePageActivity"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity -->
         <!-- android:name=".authenticate.SignUpActivity" -->
         <!-- android:parentActivityName=".authenticate.SignInActivity" /> -->

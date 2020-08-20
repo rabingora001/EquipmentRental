@@ -43,6 +43,9 @@ public class SignInActivity extends AppCompatActivity
     private static ProgressBar mProgressBar;
     private JSONObject mRegisterJSON;
 
+    //for testing
+    private boolean mTest = true;   //remove after done testing.
+
     /*
     displays the SingInActivity with the LoginFragment on top of SignInActivity.
      */
@@ -77,14 +80,9 @@ public class SignInActivity extends AppCompatActivity
      */
     @Override
     public void registerSubmit(String firstName, String lastName, String username, String userAddress, String email, String pwd) {
-
-
-
         //register method
         register(firstName, lastName, username, userAddress, email, pwd);
     }
-
-
 
 
     /*

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -121,10 +122,10 @@ public class LoginFragment extends Fragment {
         });
 
         //custom login
-        final EditText emailText = view.findViewById(R.id.sign_in_email_id);
-        final EditText pwdText = view.findViewById(R.id.sign_in_password_id);
+        final EditText emailText = view.findViewById(R.id.email_address_id);
+        final EditText pwdText = view.findViewById(R.id.password_id);
         //sign In button click listener
-        Button loginBtn = view.findViewById(R.id.sign_in_button_id);
+        Button loginBtn = view.findViewById(R.id.login_button);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,25 +133,47 @@ public class LoginFragment extends Fragment {
                 String email = emailText.getText().toString();
                 String pwd = pwdText.getText().toString();
 
+//                try {
+//                    //check if the account is valid from account class.
+//                    //if not throws an IlligalArgument exception.
+//                    Account loginAcc = new Account(email, pwd);
+//
+//                    //set the SharedPreference to true.
+//                    mSharedPreferences
+//                            .edit()
+//                            .putBoolean(getString(R.string.LOGGEDIN), true)
+//                            .commit();
+//
+//                    //store the email in shared preference session.
+//                    mSharedPreferences.edit().putString("email", email).commit();
+//
+//                    //call the login method.
+//                    login(email, pwd);
+//
+//                } catch(IllegalArgumentException e) {
+//                    Toast.makeText(v.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+
                 if (TextUtils.isEmpty(email) || !email.contains("@")) {
-                    Toast.makeText(v.getContext(), "Enter Valid Email ID", Toast.LENGTH_SHORT).show();
-                    emailText.requestFocus();
+                    Toast.makeText(v.getContext(), "Enter valid email address", Toast.LENGTH_SHORT).show();
+//                    emailText.requestFocus();
 
                 } else if (TextUtils.isEmpty(pwd) || pwd.length() < 6) {
-                    Toast.makeText(v.getContext(), "Enter valid password with at least 6 characters",
+                    Toast.makeText(v.getContext(), "Enter valid password (at least 6 characters)",
                             Toast.LENGTH_SHORT).show();
-                    pwdText.requestFocus();
+//                    pwdText.requestFocus();
 
                 } else {
-                    //
+                    //set the sharedpreference to true.
                     mSharedPreferences
                             .edit()
                             .putBoolean(getString(R.string.LOGGEDIN), true)
                             .commit();
-                    displayMainMenuPage();
+
                     //store the email in shared preference session.
                     mSharedPreferences.edit().putString("email", email).commit();
-                    //run the login check in heroku backend
+
+                    //call the login method.
                     login(email, pwd);
                 }
             }
@@ -205,7 +228,7 @@ public class LoginFragment extends Fragment {
             new LoginAsyncTask().execute(url.toString());
 
         } catch (JSONException e) {
-            Toast.makeText(getContext(), "Invalid Login: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Invalid Login1: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -258,7 +281,9 @@ public class LoginFragment extends Fragment {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
-
+                    Toast.makeText(getContext(), "login successful", Toast.LENGTH_SHORT).show();
+                    //display next activity page
+                    displayMainMenuPage();
                 } else {
                     Toast.makeText(getContext(), "Invalid Login"
                             , Toast.LENGTH_SHORT).show();
