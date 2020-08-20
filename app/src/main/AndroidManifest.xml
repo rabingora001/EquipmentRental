@@ -18,7 +18,12 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Messages.EmailActivity"></activity>
+        <activity android:name=".chores.ChoresDetailActivity"></activity>
+        <activity
+            android:name=".chores.ChoresBrowsingActivity"
+            android:label="@string/title_activity_chores_browsing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Messages.EmailActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

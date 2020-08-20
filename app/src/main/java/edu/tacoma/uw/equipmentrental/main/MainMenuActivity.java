@@ -183,6 +183,8 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+
+
     /*
      * Displays the home page.
      * @param view
