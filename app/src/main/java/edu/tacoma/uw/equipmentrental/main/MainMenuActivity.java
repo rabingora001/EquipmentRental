@@ -41,6 +41,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private TextView mTextName;
     private TextView mTextEmail;
 
+    SharedPreferences sharedPreferences;
+
     /**
      * checks for fb login status in this method.
      */
@@ -52,8 +54,28 @@ public class MainMenuActivity extends AppCompatActivity {
         mTextName = findViewById(R.id.profile_name_id);
         mTextEmail = findViewById(R.id.profile_email_id);
         mImageView = findViewById(R.id.profile_pic_id);
+
+        sharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS),
+                Context.MODE_PRIVATE);
+
         //checks for facebook login status.
         checkLoginStatus();
+
+        //check for the custom login status.
+        checkCustomLoginRegister();
+    }
+
+    /**
+     * custom login check. set the username and email to the page.
+     */
+    private void checkCustomLoginRegister() {
+        if (sharedPreferences.getBoolean(getString(R.string.LOGGEDIN), true)) {
+            //setting the email from shared preference session stored from login fragment.
+            mTextEmail.setText(sharedPreferences.getString("email","").toString());
+            mTextName.setText(sharedPreferences.getString("firstName", "").toString()
+                            + " " + sharedPreferences.getString("lastName", ""));
+            //Toast.makeText(this, "user is custom logged in", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /*
@@ -74,8 +96,9 @@ public class MainMenuActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.action_logout) {
 
             //logout from shared preferences.
-            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS),
-                    Context.MODE_PRIVATE);
+            //clear the everything including stored email in shared preference
+            sharedPreferences.edit().clear().commit();
+            //put false to boolean
             sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false).commit();
 
             //logout from facebook

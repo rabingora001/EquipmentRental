@@ -1,12 +1,13 @@
 package edu.tacoma.uw.equipmentrental.authenticate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,20 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Arrays;
-
 import edu.tacoma.uw.equipmentrental.R;
-import edu.tacoma.uw.equipmentrental.main.MainMenuActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,14 +27,18 @@ public class RegisterFragment extends Fragment {
     //submit button listener.
     RegisterFragmentListener mRegisterFragmentListener;
 
+    //SharedPrefence member variable
+    SharedPreferences mSharedPreference;
 
     /**
      * interface for submit button listener
      */
     public interface RegisterFragmentListener{
         public void registerSubmit(String firstName, String lastName, String username, String address, String email, String pwd);
-
     }
+
+
+
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -54,6 +46,9 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //always need to put this for shared preference on onCreate().
+       mSharedPreference = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
     }
 
     /*
@@ -126,9 +121,16 @@ public class RegisterFragment extends Fragment {
                     passwordText.requestFocus();
 
                 } else {
+                    //set the sharedpreference first, last, email.
+                    mSharedPreference.edit().putString("email", email).commit();
+                    mSharedPreference.edit().putString("firstName", firstName).commit();
+                    mSharedPreference.edit().putString("lastName", lastName).commit();
+                    mSharedPreference.edit().putString("address", userAddress).commit();
+                    mSharedPreference.edit().putString("username", username).commit();
+
+                    //send the registration informations to the register submit method in EquipmentDetailActivity(it
+                    //implements the RegisterFragmentListener interface).
                     mRegisterFragmentListener.registerSubmit(firstName, lastName, username, userAddress, email, password);
-
-
                 }
             }
         });
