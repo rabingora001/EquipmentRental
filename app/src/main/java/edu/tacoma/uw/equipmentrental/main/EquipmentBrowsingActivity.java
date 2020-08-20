@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import com.facebook.AccessToken;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -133,7 +134,6 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
         private final List<Equipment> mValues;
         private final boolean mTwoPane;
 
-
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,29 +158,6 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
             }
         };
 
-
-//        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Course item = (Course) view.getTag();
-//                if (mTwoPane) {
-//                    Bundle arguments = new Bundle();
-//                    arguments.putString(CourseDetailFragment.ARG_ITEM_ID, item.getmCourseId());
-//                    CourseDetailFragment fragment = new CourseDetailFragment();
-//                    fragment.setArguments(arguments);
-//                    mParentActivity.getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.item_detail_container, fragment)
-//                            .commit();
-//                } else {
-//                    Context context = view.getContext();
-//                    Intent intent = new Intent(context, CourseDetailActivity.class);
-//                    intent.putExtra(CourseDetailFragment.ARG_ITEM_ID, item.getmCourseId());
-//
-//                    context.startActivity(intent);
-//                }
-//            }
-//        };
-
         SimpleItemRecyclerViewAdapter(EquipmentBrowsingActivity parent,
                                       List<Equipment> items,
                                       boolean twoPane) {
@@ -202,6 +179,11 @@ public class EquipmentBrowsingActivity extends AppCompatActivity {
             holder.mContentView.setText(mValues.get(position).getmEquipmentShortDesc());
 
             holder.itemView.setTag(mValues.get(position));
+
+            //if fb login user, show edit option
+//            if (AccessToken.getCurrentAccessToken() != null) {
+//                holder.mContentView.setText(mValues.get(position).getmEquipmentShortDesc() + "Edit");
+//            }
             holder.itemView.setOnClickListener(mOnClickListener);
         }
 
