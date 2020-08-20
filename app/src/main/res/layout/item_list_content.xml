@@ -2,13 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/darkGray"
     android:orientation="horizontal">
+
+
 
     <TextView
         android:id="@+id/id_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#000000"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
@@ -16,5 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#000000"
         android:textAppearance="?attr/textAppearanceListItem" />
+
 </LinearLayout>

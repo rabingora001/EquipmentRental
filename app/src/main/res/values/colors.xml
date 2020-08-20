@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-
-    //colors of uw
-    <color name="uwPurple">#4b2e83</color>
-    <color name="uwGold">#C56142</color>
-    <color name="uwMetallicGold">#DFA29E</color>
-    <color name="uwGray">#D3BA56</color>
-    <color name="uwWhite">#ffffff</color>
-    <color name="uwBlack">#000000</color>
+    <color name="colorPrimary">#FFCE9F</color>
+    <color name="colorPrimaryDark">#FF9933</color>
+    <color name="colorAccent">#D79B00</color>
+    <color name="darkGray">#808080</color>
+    <color name="white">#FFFFFF</color>
 </resources>

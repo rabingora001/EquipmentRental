@@ -1,24 +1,30 @@
 <resources>
     <!-- Base application theme. -->
 
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/uwMetallicGold</item>
-        <item name="colorPrimaryDark">@color/uwGold</item>
-        <item name="colorAccent">@color/uwMetallicGold</item>
-        <item name="android:textColor">@color/uwPurple</item>
-        <item name="android:textSize">24sp</item>
-        <!--        <item name="android:tint">@color/uwPurple</item>-->
-        <item name="android:editTextColor">@color/uwMetallicGold</item>
-        <item name="android:textColorHint">@color/uwGold</item>
+<!--    <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/uwMetallicGold</item>-->
+<!--        <item name="colorPrimaryDark">@color/uwGold</item>-->
+<!--&lt;!&ndash;        <item name="colorAccent">@color/uwMetallicGold</item>&ndash;&gt;-->
+<!--        <item name="android:textColor">@color/uwPurple</item>-->
+<!--        <item name="android:textSize">24sp</item>-->
+<!--                <item name="android:tint">@color/uwPurple</item>-->
+<!--        <item name="android:editTextColor">@color/uwMetallicGold</item>-->
+<!--        <item name="android:textColorHint">@color/uwGold</item>-->
 
-    </style>
+<!--    </style>-->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/darkGray</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+<!--        <item name="android:tint">@color/darkGray</item>-->
+        <item name="android:textColor">@color/white</item>
+        <item name="background">@color/colorPrimary</item>
+<!--        <item name="android:navigationBarColor">@color/darkGray</item>-->
+<!--        <item name="android:background">@color/colorPrimary</item>-->
+
 <!--        <item name="windowActionBar">false</item>-->
 <!--        <item name="windowNoTitle">true</item>-->
     </style>
