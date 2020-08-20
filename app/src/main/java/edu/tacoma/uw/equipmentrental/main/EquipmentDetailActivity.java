@@ -15,7 +15,10 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import edu.tacoma.uw.equipmentrental.Messages.EmailActivity;
+import edu.tacoma.uw.equipmentrental.Messages.EmailFragment;
 import edu.tacoma.uw.equipmentrental.R;
+import edu.tacoma.uw.equipmentrental.authenticate.RegisterFragment;
 import model.Equipment;
 
 import org.json.JSONException;
@@ -45,8 +48,13 @@ public class EquipmentDetailActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Message the renter. don't do anything for now", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+            displayEmailPage();
+
+
+
+//                Snackbar.make(view, "Message the renter. don't do anything for now", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 
@@ -85,6 +93,16 @@ public class EquipmentDetailActivity extends AppCompatActivity
             }
         }
     }
+
+    /**
+     * This method starts the EmailActivity.class
+     */
+    public void displayEmailPage() {
+        Intent i = new Intent(this, EmailActivity.class);
+        startActivity(i);
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

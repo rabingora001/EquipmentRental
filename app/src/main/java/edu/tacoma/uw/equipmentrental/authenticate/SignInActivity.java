@@ -61,7 +61,7 @@ public class SignInActivity extends AppCompatActivity
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
 
         if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
-            //lunch the login fragment
+            //launch the login fragment
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.signInActivity_fragmentPlaceholder_id, new LoginFragment())

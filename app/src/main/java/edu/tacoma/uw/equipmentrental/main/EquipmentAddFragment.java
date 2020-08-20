@@ -31,7 +31,7 @@ public class EquipmentAddFragment extends Fragment {
     private AddListener mAddListener;
 
     public interface AddListener {
-        public void addEquipment(Equipment eqpuipment);
+        public void addEquipment(Equipment equipment);
     }
 
     public EquipmentAddFragment() {
