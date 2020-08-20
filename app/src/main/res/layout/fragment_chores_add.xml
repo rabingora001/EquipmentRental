@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".chores.ChoresAddFragment">
+
+    <EditText
+        android:id="@+id/add_chore_price"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:hint="price to complete a chore"
+        app:layout_constraintBottom_toTopOf="@+id/add_choreemail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_chore_longdesc" />
+
+    <EditText
+        android:id="@+id/add_chore_chore"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="72dp"
+        android:hint="chore name"
+        app:layout_constraintBottom_toTopOf="@+id/add_chore_addr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <EditText
+        android:id="@+id/add_chore_addr"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:hint="address"
+        app:layout_constraintBottom_toTopOf="@+id/add_chore_longdesc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_chore_chore" />
+
+
+    <EditText
+        android:id="@+id/add_chore_longdesc"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:hint="chore description"
+        app:layout_constraintBottom_toTopOf="@+id/add_chore_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_chore_addr" />
+
+    <EditText
+        android:id="@+id/add_choreemail"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginRight="91dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_equipment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_chore_price" />
+
+    <Button
+        android:id="@+id/btn_add_equipment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="265dp"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
+        android:text="add chore"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_choreemail" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

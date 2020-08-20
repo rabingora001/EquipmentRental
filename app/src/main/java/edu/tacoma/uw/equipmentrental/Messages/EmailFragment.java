@@ -38,6 +38,10 @@ import model.Equipment;
 public class EmailFragment extends Fragment {
 
     public static final String SEND_EMAIL = "SEND_EMAIL";
+
+    /**
+     * JSON object for email strings to be used for nedemailer parameters.
+     */
     private JSONObject mEmailJSON;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -50,10 +54,10 @@ public class EmailFragment extends Fragment {
     private String mParam2;
 //    private EmailListener mEmailListener;
 
-//    public interface EmailListener {
-//        public void sendEmail(String sendTo, String subject, String email, String message);
-//    }
 
+    /**
+     * Required empty public constructor.
+     */
     public EmailFragment() {
         // Required empty public constructor
     }
@@ -87,6 +91,13 @@ public class EmailFragment extends Fragment {
         }
     }
 
+    /**
+     *  Overrides onCreateView, takes user input strings from edit text fields and sends an email via nodemailer.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return View
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -147,8 +158,13 @@ public class EmailFragment extends Fragment {
     }
 
 
-
-
+    /**
+     * Send email via nodemailer via an Async Class.
+     * @param sendTo
+     * @param subject
+     * @param email
+     * @param message
+     */
     public void sendEmail(String sendTo, String subject, String email, String message) {
         StringBuilder url = new StringBuilder(getString(R.string.email_url));
 
@@ -170,6 +186,12 @@ public class EmailFragment extends Fragment {
 
 
     private class EmailAsyncTask extends AsyncTask<String, Void, String> {
+
+        /**
+         * Sends JSON strings through urls.
+         * @param urls
+         * @return String
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -208,6 +230,10 @@ public class EmailFragment extends Fragment {
             return response;
         }
 
+        /**
+         * After execution of post.
+         * @param s
+         */
         @Override
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to send email")) {

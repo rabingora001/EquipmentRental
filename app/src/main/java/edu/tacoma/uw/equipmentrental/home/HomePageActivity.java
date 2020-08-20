@@ -10,6 +10,7 @@ import com.facebook.AccessToken;
 
 import edu.tacoma.uw.equipmentrental.R;
 import edu.tacoma.uw.equipmentrental.authenticate.SignInActivity;
+import edu.tacoma.uw.equipmentrental.chores.ChoresBrowsingActivity;
 import edu.tacoma.uw.equipmentrental.main.EquipmentAddFragment;
 import edu.tacoma.uw.equipmentrental.main.EquipmentBrowsingActivity;
 import edu.tacoma.uw.equipmentrental.main.EquipmentDetailActivity;
@@ -66,6 +67,15 @@ public class HomePageActivity extends AppCompatActivity {
      */
     public void displayMapPage(View view) {
         Intent i = new Intent(this, MapsActivity.class);
+        startActivity(i);
+    }
+
+    /**
+     * This method starts the MapsActivity.class
+     * @param view
+     */
+    public void displayChoresPage(View view) {
+        Intent i = new Intent(this, ChoresBrowsingActivity.class);
         startActivity(i);
     }
 
